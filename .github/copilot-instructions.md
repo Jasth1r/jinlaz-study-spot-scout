@@ -11,12 +11,12 @@ the page             Node + Express        the database
 - `server/server.js` is a Node + Express server. It serves `web/` as static files and has `/api/...` routes. Each route runs SQL and returns JSON.
 - `db/` holds SQL: `schema.sql` (CREATE TABLE statements), any load script (`load.js`) that reads CSV files and inserts rows, and `queries.sql` (the queries the app uses, so the student can run them in VS Code).
 - Connection settings come from `.env` (see `.env.example`), read with `dotenv`. Packages available: `express`, `mssql`, `dotenv`. Ask before adding others.
-- `examples/olist-explorer/` is a small, tested, finished app. Use it as the pattern for connecting, routes, and parameters.
+- `scripts/check-connection.js` shows the connection settings that work for the class server (encrypt true, trustServerCertificate true).
 
 ## Database
 - SQL Server 2022 on `is-info430.ischool.uw.edu`, reached only from UW Wi-Fi or the Husky OnNet VPN.
 - Class datasets (read-only): databases `olist`, `stackexchange`, `gtfs`. Use three-part names, like `olist.dbo.sellers`.
-- A student loading their own data creates their own database named `ship_<NetID>` and creates tables there. Never create or change anything in `olist`, `stackexchange`, or `gtfs`.
+- A student loading their own data creates their own database named `<NetID>_myapp` and creates tables there. Never create or change anything in `olist`, `stackexchange`, or `gtfs`.
 - Use SQL Server (T-SQL) syntax: `TOP (n)`, not `LIMIT`.
 
 ## Rules

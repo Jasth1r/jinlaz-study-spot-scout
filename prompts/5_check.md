@@ -9,3 +9,5 @@ AI-written code often runs and is still wrong. Check three things yourself:
 If something is wrong, paste the exact error or the wrong output into the AI and ask it to fix it.
 
 Then fill in [PROMPTS.md](../PROMPTS.md), commit, and push (Source Control: message, **Commit**, **Sync Changes**). Open your repository on GitHub and check that there is no `.env` file.
+
+Then make it yours: ask for a second view, a better design, a new table, a chart. Every change: ask, check, commit.

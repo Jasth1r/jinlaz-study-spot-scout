@@ -1,6 +1,6 @@
 # Ship It by Noon: The one-hour Database App
 
-You will build a small, real web app on data you choose, from an empty folder, by directing an AI coding assistant. You decide what the app does. The AI writes most of the code. You run it, check it, and fix it.
+You will build a small, real web app from your own idea, starting from an empty folder, by directing an AI coding assistant. Nothing in this repository is an app: it holds only **places for things** and **the rules your AI follows**, plus the location of the class database. The idea is yours, the code comes from you directing the AI, and you run it, check it, and fix it.
 
 ```
 web/index.html  -->  server/server.js  -->  SQL Server (class server)
@@ -22,7 +22,7 @@ The page never talks to the database. It asks your server (`/api/...`), the serv
 | `prompts/` | The prompt for each step, to copy and adapt | Given |
 | `AGENTS.md` | Rules the AI reads automatically: the architecture, parameters only, no passwords in code. Copies in `.github/copilot-instructions.md` (Copilot) and `CLAUDE.md` (Claude Code) | Given |
 | `DATASETS.md` | Data to choose from | Given |
-| `examples/olist-explorer/` | A small finished app to look at and run (`npm run example`) | Given |
+| `scripts/check-connection.js` | A setup check: can your laptop reach the class database? (`npm run check`) | Given |
 
 ## Before you start
 
@@ -32,12 +32,12 @@ The page never talks to the database. It asks your server (`/api/...`), the serv
 
 ## Steps
 
-0. **Set up (5 min).** On GitHub, click **Use this template**, then **Create a new repository** (public). In VS Code: **Source Control > Clone Repository**. In the terminal: `npm install`. Copy `.env.example` to `.env` and paste the student password from Canvas. Try the worked example: `npm run example`, then open <http://localhost:3000>.
-1. **Pick data and an idea (10 min).** [prompts/1_idea.md](prompts/1_idea.md)
-2. **Database (15 min).** [prompts/2_database.md](prompts/2_database.md)
-3. **Server (20 min).** [prompts/3_server.md](prompts/3_server.md)
-4. **Page (15 min).** [prompts/4_page.md](prompts/4_page.md)
-5. **Check it and ship it (15 min).** [prompts/5_check.md](prompts/5_check.md)
+0. **Set up (5 min).** On GitHub, click **Use this template**, then **Create a new repository** (public). In VS Code: **Source Control > Clone Repository**. In the terminal: `npm install`. Copy `.env.example` to `.env` and paste the student password from Canvas. Check your setup: `npm run check` should print **OK: connected**.
+1. **Your idea (10 min).** [prompts/1_idea.md](prompts/1_idea.md)
+2. **A visible website for your idea (15 min).** [prompts/2_page.md](prompts/2_page.md)
+3. **The data (15 min).** [prompts/3_database.md](prompts/3_database.md)
+4. **Connect the page to the data (20 min).** [prompts/4_connect.md](prompts/4_connect.md)
+5. **Check it, ship it, make it yours (15 min).** [prompts/5_check.md](prompts/5_check.md)
 
 The prompts are starting points. Change them to fit your idea, and when the AI gets something wrong, tell it exactly what you saw.
 

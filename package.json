@@ -1,11 +1,11 @@
 {
   "name": "ship-it-by-noon",
   "version": "1.0.0",
-  "description": "INFO 430 starter: a web page, a small server, and the class SQL Server database",
+  "description": "INFO 430: build your own database web app with an AI assistant",
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
-    "example": "node examples/olist-explorer/server.js"
+    "check": "node scripts/check-connection.js"
   },
   "engines": {
     "node": ">=20"

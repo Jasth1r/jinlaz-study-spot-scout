@@ -1,6 +1,6 @@
-# Step 1. Pick data and an idea (10 minutes)
+# Step 1. Your idea (10 minutes)
 
-Choose a dataset from [DATASETS.md](../DATASETS.md). Then ask the AI:
+Start from something you care about. Glance at [DATASETS.md](../DATASETS.md) for data that fits, or start from a dataset you like. Then ask the AI:
 
 > I have this dataset: [name, and the tables or columns you see]. Suggest 3 small web apps that a real person would use with it. For each one, say who uses it, what they pick or type, and what they see. Keep each one buildable in an hour with one or two SQL queries.
 
