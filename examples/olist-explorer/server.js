@@ -36,7 +36,7 @@ function getPool() {
 }
 
 // The web page (public/index.html) is served as a static file.
-app.use(express.static('public'));
+app.use(express.static(require('path').join(__dirname, 'public')));
 
 // API 1: is the database reachable?
 app.get('/api/health', async (req, res) => {

@@ -1,17 +1,26 @@
-# Notes for AI coding assistants (GitHub Copilot, Claude Code, and others)
+# Rules for AI coding assistants (GitHub Copilot, Claude Code, and others)
 
-This is a student project for INFO 430 (database systems) at the UW iSchool.
-The student may be new to web development. Explain changes in plain language.
+This is a student project for INFO 430 (database systems) at the UW iSchool. The student is building their own small web app with your help. Many students are new to web development: explain each change in plain language, and tell them exactly how to run and test it.
 
-## How the app works
-- `public/index.html` is the web page. It only calls this app's own `/api/...` routes with `fetch`.
-- `server.js` is a Node + Express server. Each `/api/...` route runs one SQL query on SQL Server and returns rows as JSON.
-- The database is SQL Server on the class server. Tables live in the `olist` database: `olist.dbo.sellers`, `olist.dbo.order_items`, `olist.dbo.products`, and others. Use three-part names.
-- Connection settings come from `.env` (see `.env.example`).
+## Architecture (keep to it)
+```
+web/index.html  -->  server/server.js  -->  SQL Server (class server)
+the page             Node + Express        the database
+```
+- `web/` holds the page: plain HTML, CSS, and JavaScript. The page only calls this app's own `/api/...` routes with `fetch`. It never talks to the database.
+- `server/server.js` is a Node + Express server. It serves `web/` as static files and has `/api/...` routes. Each route runs SQL and returns JSON.
+- `db/` holds SQL: `schema.sql` (CREATE TABLE statements), any load script (`load.js`) that reads CSV files and inserts rows, and `queries.sql` (the queries the app uses, so the student can run them in VS Code).
+- Connection settings come from `.env` (see `.env.example`), read with `dotenv`. Packages available: `express`, `mssql`, `dotenv`. Ask before adding others.
+- `examples/olist-explorer/` is a small, tested, finished app. Use it as the pattern for connecting, routes, and parameters.
+
+## Database
+- SQL Server 2022 on `is-info430.ischool.uw.edu`, reached only from UW Wi-Fi or the Husky OnNet VPN.
+- Class datasets (read-only): databases `olist`, `stackexchange`, `gtfs`. Use three-part names, like `olist.dbo.sellers`.
+- A student loading their own data creates their own database named `ship_<NetID>` and creates tables there. Never create or change anything in `olist`, `stackexchange`, or `gtfs`.
+- Use SQL Server (T-SQL) syntax: `TOP (n)`, not `LIMIT`.
 
 ## Rules
-- Any value that comes from the user goes into SQL as a parameter (`request.input(...)` and `@name`), never by pasting strings into SQL text.
-- Never put a password in code, and never commit `.env`.
-- The student login is read-only: SELECT only. Do not write CREATE, INSERT, UPDATE, or DELETE against `olist`.
-- Keep it simple: no frameworks beyond Express, no build step, no extra npm packages unless asked.
-- After a change, tell the student exactly how to test it (`npm start`, then which page or URL to open).
+- Any value that comes from the user goes into SQL as a parameter (`request.input('name', sql.NVarChar(100), value)` and `@name` in the SQL). Never build SQL by pasting strings together.
+- Never put a password in code. Never commit `.env`.
+- Keep it small: one HTML file, one server file, no frameworks, no build step.
+- When you change something, add one line to `PROMPTS.md` only if the student asks; the student keeps that log.

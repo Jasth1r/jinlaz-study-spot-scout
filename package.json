@@ -2,9 +2,10 @@
   "name": "ship-it-by-noon",
   "version": "1.0.0",
   "description": "INFO 430 starter: a web page, a small server, and the class SQL Server database",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server/server.js",
+    "example": "node examples/olist-explorer/server.js"
   },
   "engines": {
     "node": ">=20"
