@@ -19,7 +19,7 @@ const sql = require('mssql');
     await pool.close();
   } catch (err) {
     console.log('NOT CONNECTED: ' + err.message);
-    console.log('Check: are you on UW Wi-Fi or Husky OnNet? Is .env filled in (copied from .env.example, with the password from Canvas)?');
+    console.log('Check: are you on UW Wi-Fi or Husky OnNet? Is .env filled in (copied from .env.example, with the password from Canvas)? If it says Login failed, have you run npm run create-db yet?');
     process.exitCode = 1;
   }
 })();
