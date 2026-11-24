@@ -10,6 +10,20 @@ the page you see     the middle tier:        the data
 
 The page never talks to the database. It asks your server (`/api/...`), the server runs SQL with the user's input as a **parameter**, and sends the rows back as JSON.
 
+## Use Copilot Free (no student verification needed)
+
+Student verification can be slow or fail with an unhelpful error. You don't need it today: **Copilot Free** works right away.
+
+1. In VS Code, hover over the **Copilot icon in the Status Bar** (bottom of the window) and click **Use AI Features**. (Or open the Accounts menu, bottom left, and sign in with GitHub.)
+2. Sign in with your GitHub account and follow the prompts. If your account has no Copilot plan, signing in **enrolls you in Copilot Free** automatically.
+3. Open the Chat panel and choose **Agent** mode.
+
+If VS Code still won't start Copilot: go to <https://github.com/settings/copilot>, click **Start using Copilot Free**, then sign in again in VS Code. Copilot Free has a monthly allowance; the Copilot icon in the Status Bar shows how much you've used.
+
+Sources: [Set up Copilot in VS Code](https://code.visualstudio.com/docs/setup/copilot), [Get started with a Copilot plan](https://docs.github.com/en/copilot/how-tos/manage-your-account/get-started-with-a-copilot-plan).
+
+**Backup if Copilot won't work at all: Google Antigravity.** A free (for individuals) editor built on VS Code with an AI agent, for Mac, Windows, and Linux, signed in with a Google account. Download at <https://antigravity.google/download>, open your cloned folder in it, and use its agent with the same prompts. ([Google's announcement](https://developers.googleblog.com/build-with-google-antigravity-our-new-agentic-development-platform/))
+
 ## Steps
 
 1. **Set up VS Code (10 min).** [prompts/1_setup_vscode.md](prompts/1_setup_vscode.md)
