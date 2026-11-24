@@ -1,1 +1,1 @@
-Your SQL goes here: schema.sql, load.js (only if you load your own data), queries.sql. See prompts/2_database.md.
+SQL goes here: schema.sql, load.js (creates your database and loads rows), queries.sql. See prompts/3_database.md.

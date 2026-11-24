@@ -18,6 +18,8 @@ the page             Node + Express        the database
 - Class datasets (read-only): databases `olist`, `stackexchange`, `gtfs`. Use three-part names, like `olist.dbo.sellers`.
 - A student loading their own data creates their own database named `<NetID>_myapp` and creates tables there. Never create or change anything in `olist`, `stackexchange`, or `gtfs`.
 - Use SQL Server (T-SQL) syntax: `TOP (n)`, not `LIMIT`.
+- `db/load.js` connects to the `master` database to run `CREATE DATABASE`, then switches to the new database. A database name cannot be a SQL parameter, so load.js must first check the name: letters, digits, and underscores only, ending in `_myapp`, and stop with a clear error otherwise. Wrap it in square brackets in the SQL.
+- Until load.js has created the database, any connection with `DB_NAME=<netid>_myapp` fails with "Login failed". Tell the student to run `node db/load.js` before changing `DB_NAME` in `.env` for the server.
 
 ## Rules
 - Any value that comes from the user goes into SQL as a parameter (`request.input('name', sql.NVarChar(100), value)` and `@name` in the SQL). Never build SQL by pasting strings together.

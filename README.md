@@ -55,6 +55,8 @@ Both read a project rules file, and both make mistakes: checking the result is y
 ## Troubleshooting
 
 - **"getaddrinfo ENOTFOUND" or a timeout**: you are not on the UW network. Connect to Husky OnNet.
-- **"Login failed for user"**: the password in `.env` is wrong or has extra spaces.
+- **"Login failed for user" right after changing `DB_NAME`**: your database does not exist yet. Run `node db/load.js` first.
+- **"Login failed for user" otherwise**: the password in `.env` is wrong or has extra spaces.
+- **Everyone shares one database login today**, so other students could see your database. Don't put anything private in it.
 - **`EADDRINUSE` when starting**: a server is already running in another terminal. Stop it with Ctrl+C, or set `PORT=3001` in `.env`.
 - **The page did not change after an edit**: restart the server (Ctrl+C, then `npm start`) and reload the page.

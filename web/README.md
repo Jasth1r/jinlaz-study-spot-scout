@@ -1,1 +1,1 @@
-Your web page goes here: index.html. See prompts/4_page.md.
+Your web page goes here: index.html. See prompts/2_page.md.
