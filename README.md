@@ -41,7 +41,7 @@ Everyone adds the same feature: **the top product categories in the chosen state
 
 Give Claude this prompt. If you use the claude.ai chat, also paste in `server.js` and `public/index.html` (and `CLAUDE.md`, which tells Claude the rules for this project).
 
-> In this app, add a feature: when I click "Show top sellers", also show the 5 product categories with the most revenue among sellers in that state. Use olist.dbo.order_items joined to olist.dbo.products on product_id, and olist.dbo.sellers on seller_id, grouped by products.product_category_name. Add a new route GET /api/top-categories?state=XX in server.js that passes the state as a SQL parameter, and show the result as a second table on the page with columns Category, Items sold, Revenue.
+> In this app, add a feature: when I click "Show top sellers", also show the 5 product categories with the most revenue among sellers in that state. Use olist.dbo.order_items joined to olist.dbo.products on product_id, and olist.dbo.sellers on seller_id, grouped by products.product_category_name. Add a new route GET /api/top-categories?state=XX in server.js that passes the state as a SQL parameter, and show the result as a second table on the page with columns Category, Items sold, Revenue (rounded to 2 decimals).
 
 Then:
 
