@@ -14,7 +14,7 @@ The page never talks to the database. It asks the server (`/api/top-sellers?stat
 - **Be on UW Wi-Fi or the Husky OnNet VPN.** The class server is only reachable from the UW network, the same as in VS Code.
 - **Node.js 20 or newer.** In a VS Code terminal, run `node -v`. If you see an error, install the LTS version from <https://nodejs.org> and restart VS Code.
 - **A GitHub account,** signed in to VS Code.
-- **An AI coding assistant.** We recommend Claude: Claude Code if you have it, or the free chat at <https://claude.ai>.
+- **VS Code with GitHub Copilot.** Copilot is free for verified students: apply at <https://education.github.com/pack>, then sign in to GitHub in VS Code and open the Copilot Chat panel. Without student verification, Copilot Free still works, with a smaller monthly allowance.
 
 ## Part 1. Get the starter running (about 20 minutes)
 
@@ -35,18 +35,18 @@ The page never talks to the database. It asks the server (`/api/top-sellers?stat
 
 To stop the server, click in the terminal and press Ctrl+C. Start it again after every code change.
 
-## Part 2. Add a feature with Claude (about 30 minutes)
+## Part 2. Add a feature with Copilot (about 30 minutes)
 
 Everyone adds the same feature: **the top product categories in the chosen state**. It touches all three pieces: a new SQL query, a new `/api` route in `server.js`, and a new table on the page.
 
-Give Claude this prompt. If you use the claude.ai chat, also paste in `server.js` and `public/index.html` (and `CLAUDE.md`, which tells Claude the rules for this project).
+Open Copilot Chat in VS Code, switch it to **Agent** mode (so it can edit files itself), and give it this prompt. Copilot reads `.github/copilot-instructions.md` automatically, which tells it how this app works and its rules.
 
 > In this app, add a feature: when I click "Show top sellers", also show the 5 product categories with the most revenue among sellers in that state. Use olist.dbo.order_items joined to olist.dbo.products on product_id, and olist.dbo.sellers on seller_id, grouped by products.product_category_name. Add a new route GET /api/top-categories?state=XX in server.js that passes the state as a SQL parameter, and show the result as a second table on the page with columns Category, Items sold, Revenue (rounded to 2 decimals).
 
 Then:
 
-1. Paste in Claude's changes, restart the server (Ctrl+C, then `npm start`), and reload the page.
-2. If something breaks, copy the error from the terminal or the page into Claude and ask it to fix it.
+1. Review the changes Copilot made and click **Keep**, then restart the server (Ctrl+C, then `npm start`), and reload the page.
+2. If something breaks, copy the error from the terminal or the page into Copilot Chat and ask it to fix it.
 3. Check that it is right: open <http://localhost:3000/api/top-categories?state=SP> to see the raw JSON, and compare one number with the same query run in VS Code.
 4. Take **Screenshot 2**: the page showing both tables.
 
@@ -59,6 +59,17 @@ Open your repository on GitHub and check that `server.js` has your new route and
 
 See the Canvas assignment. You will submit Screenshot 1, Screenshot 2, and the link to your GitHub repository.
 
+## Copilot or Claude Code?
+
+| | GitHub Copilot (what we use in class) | Claude Code (what the instructor uses) |
+| --- | --- | --- |
+| Where it runs | Chat panel inside VS Code; Agent mode edits files and runs commands | Terminal, or the Claude Code extension in VS Code |
+| Models | Several providers; the free Student plan picks the model for you (Auto) | Anthropic's Claude models only, which you choose |
+| Price | Free for verified students (Copilot Student); Copilot Free for everyone else | Needs a paid Claude plan: Pro is about $20/month; Max costs more |
+| Links | <https://github.com/features/copilot>, <https://education.github.com/pack> | <https://claude.com/product/claude-code>, <https://claude.com/pricing> |
+
+Both read a project instructions file (`.github/copilot-instructions.md` or `CLAUDE.md`), and both can make mistakes: you check the result.
+
 ## Files
 
 | File | What it is |
@@ -66,7 +77,7 @@ See the Canvas assignment. You will submit Screenshot 1, Screenshot 2, and the l
 | `public/index.html` | The web page (HTML, CSS, and JavaScript that calls `/api/...`) |
 | `server.js` | The middleware: Express routes, each running one parameterized SQL query |
 | `.env.example` | The settings the server needs. Copy it to `.env` and fill in the password |
-| `CLAUDE.md` | Instructions that Claude Code reads automatically: how this app works and its rules |
+| `AGENTS.md` | How this app works and its rules, for AI coding assistants. Copies: `.github/copilot-instructions.md` (Copilot) and `CLAUDE.md` (Claude Code) |
 | `package.json` | The npm packages: `express` (web server), `mssql` (SQL Server driver), `dotenv` (reads `.env`) |
 
 ## Troubleshooting
