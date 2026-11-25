@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Study Spot Scout</title>
+  <style>
+    :root { --ink:#17202a; --muted:#637080; --cream:#fffaf2; --green:#1f6f5b; --mint:#dcefe7; --line:#e7ded0; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--cream); font:16px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { max-width:1080px; margin:0 auto; padding:48px 24px 72px; }
+    .eyebrow { color:var(--green); font-weight:750; letter-spacing:.08em; text-transform:uppercase; font-size:.78rem; }
+    h1 { max-width:700px; margin:8px 0 12px; font:800 clamp(2.5rem,6vw,5rem)/.98 Georgia,serif; letter-spacing:-.05em; }
+    .intro { max-width:650px; color:var(--muted); font-size:1.1rem; }
+    .panel { margin-top:32px; padding:22px; border:1px solid var(--line); border-radius:20px; background:#fff; box-shadow:0 12px 30px #55462c12; }
+    .filters { display:grid; grid-template-columns:1fr 1fr auto; gap:14px; align-items:end; }
+    label { display:grid; gap:7px; color:var(--muted); font-size:.9rem; font-weight:650; }
+    select, button { min-height:44px; border:1px solid var(--line); border-radius:10px; padding:0 13px; font:inherit; }
+    select { background:#fff; color:var(--ink); }
+    button { border-color:var(--green); background:var(--green); color:#fff; font-weight:750; cursor:pointer; }
+    button:hover { background:#185846; }
+    .summary { display:flex; justify-content:space-between; gap:16px; align-items:center; margin:26px 0 12px; }
+    .summary h2 { margin:0; font-size:1.25rem; }
+    #status { color:var(--muted); font-size:.92rem; }
+    .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:16px; }
+    .card { padding:20px; border:1px solid var(--line); border-radius:15px; background:#fff; }
+    .card h3 { margin:0 0 4px; font:700 1.35rem Georgia,serif; }
+    .neighborhood { color:var(--green); font-weight:700; font-size:.9rem; }
+    .tags { display:flex; flex-wrap:wrap; gap:7px; margin:15px 0; }
+    .tag { padding:5px 9px; border-radius:999px; background:var(--mint); color:#195542; font-size:.82rem; }
+    .details { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:0; color:var(--muted); font-size:.9rem; }
+    .details strong { display:block; color:var(--ink); font-size:1rem; }
+    .empty { padding:28px; border:1px dashed var(--line); border-radius:15px; color:var(--muted); text-align:center; }
+    @media (max-width:700px) { .filters { grid-template-columns:1fr; } .summary { display:block; } #status { margin-top:4px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="eyebrow">For focused afternoons in Seattle</div>
+    <h1>Find your next study spot.</h1>
+    <p class="intro">A quick guide to coffee shops with dependable Wi-Fi, useful seating, and a noise level that matches the work you need to do.</p>
+    <section class="panel" aria-labelledby="results-title">
+      <div class="filters">
+        <label>Neighborhood
+          <select id="neighborhood"><option value="">Any neighborhood</option><option>Capitol Hill</option><option>Fremont</option><option>University District</option><option>Ballard</option></select>
+        </label>
+        <label>Minimum Wi-Fi rating
+          <select id="wifi"><option value="0">Any rating</option><option value="3">3 / 5 or better</option><option value="4">4 / 5 or better</option><option value="5">5 / 5 only</option></select>
+        </label>
+        <button id="search">Show spots</button>
+      </div>
+      <div class="summary"><h2 id="results-title">Good places to begin</h2><span id="status">Showing sample spots</span></div>
+      <div id="cards" class="cards" aria-live="polite"></div>
+    </section>
+  </main>
+  <script>
+    const sampleSpots = [
+      { name:'Juniper & Pine', neighborhood:'Capitol Hill', wifi:5, noise:'Quiet', seats:'Plentiful', hours:'7am–8pm' },
+      { name:'Fremont Foundry Café', neighborhood:'Fremont', wifi:4, noise:'Low buzz', seats:'Good', hours:'8am–6pm' },
+      { name:'Maple Leaf Coffee', neighborhood:'University District', wifi:4, noise:'Quiet', seats:'Limited', hours:'6:30am–7pm' }
+    ];
+    const cards = document.querySelector('#cards');
+    function render(spots, source) {
+      document.querySelector('#status').textContent = `${spots.length} spot${spots.length === 1 ? '' : 's'} · ${source}`;
+      cards.innerHTML = spots.length ? spots.map(spot => `<article class="card"><h3>${spot.name}</h3><div class="neighborhood">${spot.neighborhood}</div><div class="tags"><span class="tag">Wi-Fi ${spot.wifi}/5</span><span class="tag">${spot.noise}</span></div><p class="details"><span>Seating<strong>${spot.seats}</strong></span><span>Hours<strong>${spot.hours}</strong></span></p></article>`).join('') : '<div class="empty">No spots match those filters. Try a lower Wi-Fi rating or another neighborhood.</div>';
+    }
+    async function search() {
+      const neighborhood = document.querySelector('#neighborhood').value;
+      const minWifi = document.querySelector('#wifi').value;
+      try {
+        const params = new URLSearchParams({ neighborhood, minWifi });
+        const response = await fetch(`/api/spots?${params}`);
+        if (!response.ok) throw new Error('API unavailable');
+        render(await response.json(), 'from your database');
+      } catch { render(sampleSpots.filter(s => (!neighborhood || s.neighborhood === neighborhood) && s.wifi >= Number(minWifi)), 'sample data'); }
+    }
+    document.querySelector('#search').addEventListener('click', search);
+    render(sampleSpots, 'sample data');
+  </script>
+</body>
+</html>
